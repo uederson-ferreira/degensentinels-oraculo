@@ -1,1 +1,0 @@
-# DegenSentinels-Oraculo
