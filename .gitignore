@@ -1,0 +1,69 @@
+# -------------------------------
+# Sistema operacional: macOS
+# -------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icone de pasta de rede
+Icon?
+
+# Pastas geradas pelo Spotlight
+._*
+
+# Arquivos de backup
+*.swp
+*.swo
+*.swn
+
+# -------------------------------
+# Node.js / JavaScript / TypeScript
+# -------------------------------
+# Dependências e módulos
+node_modules/
+# Logs e arquivos temporários
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diretórios de build (caso existam)
+dist/
+build/
+
+# Arquivos de cache
+.cache/
+.next/
+out/
+
+# Arquivos de configurações locais (envs)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# -------------------------------
+# Rust
+# -------------------------------
+# Diretório de compilação do Cargo
+/target/
+
+# Cargo.lock (geralmente versionado para apps, mas ignora em bibliotecas)
+Cargo.lock
+
+# Diretórios e arquivos temporários do Cargo
+**/*.rs.bk
+
+# -------------------------------
+# Outras Configurações e IDEs
+# -------------------------------
+# VSCode
+.vscode/
+
+# IntelliJ / CLion
+.idea/
+*.iml
+
+# Outros arquivos de projeto
+*.log

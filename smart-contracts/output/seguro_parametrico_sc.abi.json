@@ -1,0 +1,186 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.85.0",
+            "commitHash": "4d91de4e48198da2e33413efdcd9cd2cc0c46688",
+            "commitDate": "2025-02-17",
+            "channel": "Stable",
+            "short": "rustc 1.85.0 (4d91de4e4 2025-02-17)"
+        },
+        "contractCrate": {
+            "name": "seguro_parametrico_sc",
+            "version": "0.1.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.57.1"
+        }
+    },
+    "name": "SeguroParametrico",
+    "constructor": {
+        "docs": [
+            "Inicializa o contrato."
+        ],
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "docs": [
+                "Registra uma nova apólice de seguro.",
+                "",
+                "Parâmetros:",
+                "- `policy_id`: Identificador único da apólice.",
+                "- `contratante`: Endereço da carteira do contratante (destinatário do pagamento).",
+                "- `local`: Localização (nome ou coordenadas).",
+                "- `limite_chuva`: Limite de precipitação (em mm) que define o gatilho.",
+                "- `duracao_dias`: Período de observação (em dias).",
+                "- `valor_indemnizacao`: Valor da indenização (em EGLD).",
+                "- `expiration`: Momento de expiração da apólice (timestamp ou número de bloco)."
+            ],
+            "name": "registerPolicy",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "policy_id",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "contratante",
+                    "type": "Address"
+                },
+                {
+                    "name": "local",
+                    "type": "bytes"
+                },
+                {
+                    "name": "limite_chuva",
+                    "type": "u64"
+                },
+                {
+                    "name": "duracao_dias",
+                    "type": "u64"
+                },
+                {
+                    "name": "valor_indemnizacao",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "expiration",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Aciona o pagamento do seguro caso as condições definidas sejam atendidas.",
+                "",
+                "Parâmetros:",
+                "- `policy_id`: Identificador da apólice.",
+                "- `chuva_acumulada`: Valor acumulado de chuva (em mm) medido pelo oráculo.",
+                "- `timestamp`: Momento da medição (usado para validar a expiração).",
+                "",
+                "Condições:",
+                "- A apólice deve estar ativa.",
+                "- O timestamp não pode ultrapassar a expiração.",
+                "- A precipitação acumulada deve ser menor que o limite definido.",
+                "",
+                "Ação:",
+                "- Transfere o valor da indenização em EGLD para o contratante.",
+                "- Atualiza a apólice para inativa e registra o timestamp da atualização."
+            ],
+            "name": "triggerPayment",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "policy_id",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "chuva_acumulada",
+                    "type": "u64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "docs": [
+                "Consulta os dados da apólice com o ID fornecido."
+            ],
+            "name": "getPolicy",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "policy_id",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Option<Policy>"
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": false,
+    "types": {
+        "Policy": {
+            "type": "struct",
+            "docs": [
+                "=====================================================",
+                "ESTRUTURA DE DADOS: APÓLICE",
+                "",
+                "Representa os dados de uma apólice de seguro paramétrico:",
+                "",
+                "- `contratante`: endereço do beneficiário (quem receberá o pagamento).",
+                "- `local`: localização monitorada (nome ou coordenadas).",
+                "- `limite_chuva`: quantidade de chuva (em mm) que define o gatilho do seguro.",
+                "- `duracao_dias`: período de medição (em dias consecutivos).",
+                "- `valor_indemnizacao`: valor da indenização (em EGLD) a ser pago se acionado.",
+                "- `ativo`: indica se a apólice está ativa.",
+                "- `expiration`: tempo (timestamp ou bloco) de expiração da apólice.",
+                "- `ultima_atualizacao`: (Opcional) Timestamp da última atualização."
+            ],
+            "fields": [
+                {
+                    "name": "contratante",
+                    "type": "Address"
+                },
+                {
+                    "name": "local",
+                    "type": "bytes"
+                },
+                {
+                    "name": "limite_chuva",
+                    "type": "u64"
+                },
+                {
+                    "name": "duracao_dias",
+                    "type": "u64"
+                },
+                {
+                    "name": "valor_indemnizacao",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "ativo",
+                    "type": "bool"
+                },
+                {
+                    "name": "expiration",
+                    "type": "u64"
+                },
+                {
+                    "name": "ultima_atualizacao",
+                    "type": "Option<u64>"
+                }
+            ]
+        }
+    }
+}
