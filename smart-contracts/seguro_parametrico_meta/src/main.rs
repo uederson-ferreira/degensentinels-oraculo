@@ -1,9 +1,13 @@
-use seguro_parametrico_sc::ContractBuilder;
+use std::env;
 use seguro_parametrico_sc::AbiProvider;
 
 fn main() {
-    ContractBuilder::builder() // Inicializa o ContractBuilder corretamente
-        .with_contract::<AbiProvider>() // Adiciona o contrato
-        .with_contract_dir("smart-contracts/seguro_parametrico_sc") // Define o diretório do contrato
-        .build(); // Finaliza a construção (substituí `proxy()` por `build()`, que é mais comum)
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() > 1 && args[1] == "abi" {
+        let abi_json = AbiProvider::abi_json();
+        println!("{}", abi_json);
+    } else {
+        eprintln!("❌ Comando inválido. Use:\n\n    cargo run abi");
+    }
 }

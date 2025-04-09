@@ -1,0 +1,30 @@
+[settings]
+main = "main"
+
+[contracts.main]
+name = "seguro_parametrico"
+add-unlabelled = true
+panic-message = true            # útil para debug, remova para produção
+ei = "1.3"                      # EI mais atualizado (confirme na docs da rede-alvo)
+allocator = "leaking"          # simples e eficiente para maioria dos contratos
+stack-size = "3 pages"
+features = []                  # adicione se usar #[cfg(feature = "...")]
+kill-legacy-callback = true
+
+[contracts.main.profile]
+codegen-units = 1
+opt-level = "z"                # otimiza para tamanho
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = false
+
+[[proxy]]
+path = "output/proxy.rs"
+override-import = ""
+add-unlabelled = true
+add-labels = []
+add-endpoints = []
+[[proxy.path-rename]]
+from = ""
+to = ""
