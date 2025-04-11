@@ -1,0 +1,1 @@
+Tx<ScenarioEnvExec<'_>, multiversx_sc_scenario::imports::TestAddress<'_>, (), NotPayable, (), DeployCall<ScenarioEnvExec<'_>, ()>, OriginalResultMarker<()>>

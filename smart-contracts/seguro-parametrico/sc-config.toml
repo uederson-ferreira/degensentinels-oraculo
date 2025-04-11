@@ -1,0 +1,4 @@
+[settings]
+
+[[proxy]]
+path = "src/seguro_parametrico_proxy.rs"
