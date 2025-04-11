@@ -1,11 +1,11 @@
 use multiversx_sc_scenario::imports::*;
 use seguro_parametrico::seguro_parametrico_proxy::{self, Policy};
-
+// Estamos importando algumas ferramentas que nos ajudam a brincar de blockchain.
+use multiversx_sc_scenario::model::ReturnsNothing;
 
 const CODE_PATH: MxscPath = MxscPath::new("output/seguro_parametrico.mxsc.json");
 const OWNER: TestAddress = TestAddress::new("owner");
 const BENEFICIARIO: TestAddress = TestAddress::new("beneficiario");
-const DONOR: TestAddress = TestAddress::new("donor");
 const CONTRATO: TestSCAddress = TestSCAddress::new("seguro");
 
 fn world() -> ScenarioWorld {
@@ -19,7 +19,7 @@ fn world() -> ScenarioWorld {
 
 // Função para implantar o contrato
 fn seguro_parametrico_deploy() -> ScenarioWorld {
-    let mut world = seguro_parametrico_fund();
+    let mut world = world();
 
     //world.account(OWNER).nonce(0).balance(1_000_000_000u64);
     world.account(OWNER).nonce(0).balance(1_000_000);
@@ -38,27 +38,6 @@ fn seguro_parametrico_deploy() -> ScenarioWorld {
 
     world
 }
-
-// Essa função faz o doador doar um pouco de dinheiro pro contrato
-fn seguro_parametrico_fund() -> ScenarioWorld {
-    let mut world = seguro_parametrico_deploy(); // Primeiro, instala o contrato
-
-    // Damos dinheiro pro doador brincar
-    world.account(DONOR).nonce(0).balance(400_000_000_000u64);
-
-    // O doador envia 250 bilhões pro contrato
-    world
-        .tx()
-        .from(DONOR)
-        .to(CONTRATO)
-        .typed(seguro_parametrico_proxy::SeguroParametricoProxy)
-        .fund()
-        .egld(250_000_000_000u64)
-        .run();
-
-    world
-}
-
 
 // Teste: registro de apólice
 #[test]
