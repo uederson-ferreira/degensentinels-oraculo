@@ -1,0 +1,1 @@
+Tx<ScenarioEnvExec<'_>, multiversx_sc_scenario::imports::TestAddress<'_>, multiversx_sc_scenario::imports::TestSCAddress<'_>, multiversx_sc_scenario::imports::Egld<multiversx_sc_scenario::imports::BigUint<VMHooksApi<multiversx_sc_scenario::api::impl_vh::static_api::StaticApiBackend>>>, (), (), ()>

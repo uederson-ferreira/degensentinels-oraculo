@@ -1,0 +1,1 @@
+BlockchainWrapper<<Self as multiversx_sc::contract_base::ContractBase>::Api>

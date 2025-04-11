@@ -74,6 +74,37 @@ pub trait SeguroParametrico {
         self.policies().insert(policy_id, policy);
     }
 
+    // #[payable("EGLD")]
+    // #[endpoint(receberFundos)]
+    // fn receber_fundos(&self) {
+    //     // Não precisa fazer nada
+    //     // Apenas para aceitar o valor enviado
+    // }
+
+
+    #[payable("EGLD")]
+    #[endpoint(receber_fundos)]
+    fn receber_fundos(&self) {
+        let payment = self.call_value().egld(); // Obtém o valor enviado como EGLD
+        let payment_value = payment.clone().into_big_int(); // ✅ Converte para BigUint de forma segura
+        require!(payment_value > 0, "Nenhum EGLD enviado"); // Verifica se o valor é maior que zero
+
+        // Aqui você pode armazenar, logar ou reagir ao valor recebido
+        // Por exemplo:
+        //self.blockchain().print(&payment_value); // Apenas para debug
+}
+
+
+    // #[payable("EGLD")]
+    // #[endpoint(receber_fundos)]
+    // fn receber_fundos(&self) {
+    //     let payment = self.call_value().egld(); // Obtém o valor enviado como EGLD
+    //     let payment_value = payment.into_value(self.blockchain().get_env_wrapper()); // Converte o `ManagedRef` em um `BigUint`
+    //     require!(payment_value != BigUint::zero(), "Nenhum EGLD enviado"); // Verifica se o valor é maior que zero
+    //     // Lógica para processar os fundos recebidos
+    // }
+    
+
     // -------------------------------------------------------
     // ACIONAMENTO DO SEGURO
     // -------------------------------------------------------

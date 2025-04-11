@@ -1,1 +1,0 @@
-Option<seguro_parametrico::seguro_parametrico_proxy::Policy<VMHooksApi<multiversx_sc_scenario::api::impl_vh::static_api::StaticApiBackend>>>
