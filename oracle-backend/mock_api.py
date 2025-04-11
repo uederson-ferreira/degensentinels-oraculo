@@ -39,7 +39,7 @@ def set_precip():
         return jsonify({"error": "Valor inválido, use número."}), 400
 
 if __name__ == '__main__':
-    print("✅ Servidor rodando em http://localhost:5000")
-    print("📌 Use: curl -X POST http://localhost:5000/set?value=12.3")
-    print("📌 Ou abra: http://localhost:5000/onecall")
+    print("✅ Servidor rodando em http://localhost:5050")
+    print("📌 Use: curl -X POST http://localhost:5050/set?value=12.3")
+    print("📌 Ou abra: http://localhost:5050/onecall")
     app.run(host="0.0.0.0", port=5050)
