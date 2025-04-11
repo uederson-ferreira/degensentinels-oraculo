@@ -1,0 +1,25 @@
+[package]
+name = "seguro_parametrico"
+version = "0.1.0"
+edition = "2021"
+authors = ["Uederson Ferreira <uedersonferreira@gmail.com>"]
+description = "Smart contract para seguro paramétrico na rede MultiversX"
+publish = false
+
+[lib]
+path = "src/seguro_parametrico.rs"
+
+[dependencies.multiversx-sc]
+version = "0.57.1"
+
+[dev-dependencies]
+num-bigint = "0.4"
+
+[dev-dependencies.multiversx-sc-scenario]
+version = "0.57.1"
+
+[workspace]
+members = [
+    ".",
+    "meta",
+]

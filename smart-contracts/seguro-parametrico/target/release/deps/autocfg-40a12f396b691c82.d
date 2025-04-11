@@ -1,0 +1,10 @@
+/Users/uedersonferreira/Desktop/Programacao/NearX/degensentinels-oraculo/smart-contracts/seguro_parametrico/target/release/deps/libautocfg-40a12f396b691c82.rmeta: /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/lib.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/error.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/rustc.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/version.rs
+
+/Users/uedersonferreira/Desktop/Programacao/NearX/degensentinels-oraculo/smart-contracts/seguro_parametrico/target/release/deps/libautocfg-40a12f396b691c82.rlib: /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/lib.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/error.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/rustc.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/version.rs
+
+/Users/uedersonferreira/Desktop/Programacao/NearX/degensentinels-oraculo/smart-contracts/seguro_parametrico/target/release/deps/autocfg-40a12f396b691c82.d: /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/lib.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/error.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/rustc.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/version.rs
+
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/lib.rs:
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/error.rs:
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/rustc.rs:
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/autocfg-1.4.0/src/version.rs:
