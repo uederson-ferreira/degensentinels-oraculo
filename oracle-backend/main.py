@@ -11,7 +11,7 @@ from blockchain import send_trigger_transaction
 
 console = Console()
 
-APOLICE_DIR = "oracle-backend/apolices"
+APOLICE_DIR = "apolices"
 MONITOR_FILE = f"{APOLICE_DIR}/apolices_monitoradas.json"
 HISTORICO_LOG = f"{APOLICE_DIR}/historico_ativacoes.log"
 
@@ -21,11 +21,12 @@ def carregar_apolices():
         return []
 
     with open(MONITOR_FILE, "r") as f:
-        ids = json.load(f)
+        monitoradas = json.load(f)
 
     apolices = []
-    for policy_id in ids:
-        path = f"{APOLICE_DIR}/apolice_{policy_id}.json"
+    for item in monitoradas:
+        policy_id = item["policy_id"]
+        path = os.path.join(APOLICE_DIR, f"apolice_{policy_id}.json")
         if os.path.exists(path):
             with open(path, "r") as f:
                 dados = json.load(f)
@@ -59,10 +60,13 @@ def main():
                 policy_id = apolice["policy_id"]
                 limite = apolice["limite_chuva"]
                 validade = apolice["expiration"]
-                duracao_dias = apolice["duracao_dias"]
+                duracao_dias = apolice["dias_chuva"]
 
                 titulo = f"📋 Apólice {policy_id} ({duracao_dias} dias)"
-                console.print(Panel.fit(f"🌍 Local: {apolice['local']}\n⏳ Expira em: {validade}\n🎯 Limite: {limite} mm", title=titulo))
+                console.print(Panel.fit(
+                    f"🌍 Local: {apolice['local']}\n⏳ Expira em: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(validade))}\n🎯 Limite: {limite} mm",
+                    title=titulo
+                ))
 
                 if now > validade:
                     console.print(f"[yellow]⏰ Apólice {policy_id} expirada.[/yellow]")

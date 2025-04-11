@@ -3,113 +3,112 @@
 import time
 import json
 import os
-from multiversx_sdk.core import Address, TransactionPayload
-from multiversx_sdk.wallet import UserSigner
-from multiversx_sdk.transactions import Transaction
-from multiversx_sdk.network_providers import ApiNetworkProvider
-from config import CONTRACT_ADDRESS
+from pathlib import Path
+from multiversx_sdk import Account, Address, Transaction, DevnetEntrypoint, TransactionComputer
+from config import CONTRACT_ADDRESS, PEM_PATH, CHAIN_ID, PROXY, SENDER_ADDRESS
+from multiversx_sdk.wallet import UserPEM
 
-# CONFIGURAÇÕES
-PROXY = "https://devnet-api.multiversx.com"
-CHAIN_ID = "D"
-PEM_PATH = "smart-contracts/carteiras/carteira1/erd1e7q3eqcdpl29kw8n76q6rzg67ptqve34r40ppnfx3g373fegsjusnwxrt5.pem"
-SENDER_ADDRESS = "erd1e7q3eqcdpl29kw8n76q6rzg67ptqve34r40ppnfx3g373fegsjusnwxrt5"
-APOLICE_DIR = "oracle-backend/apolices"
+# Pasta para armazenar as apólices
+PASTA_APOLICES = "apolices"
+os.makedirs(PASTA_APOLICES, exist_ok=True)
 
-os.makedirs(APOLICE_DIR, exist_ok=True)
+def gerar_novo_id():
+    arquivos = [f for f in os.listdir(PASTA_APOLICES) if f.startswith("apolice_") and f.endswith(".json")]
+    return len(arquivos) + 1
 
-# GERA O PRÓXIMO ID DISPONÍVEL
-def find_next_policy_id(provider):
-    for i in range(1, 1000):
-        query = {
-            "scAddress": CONTRACT_ADDRESS,
-            "funcName": "getPolicy",
-            "args": [hex(i)[2:]],
-        }
-        try:
-            response = provider.do_post("/vm-values/query", query)
-            if response.get("data", {}).get("returnCode") == "error":
-                return i
-        except Exception:
-            return i
-    raise Exception("⚠️ Muitos IDs usados, revise o contrato.")
+def salvar_json(caminho, dados):
+    with open(caminho, "w") as f:
+        json.dump(dados, f, indent=4)
 
-# ATUALIZA ARQUIVO DE MONITORAMENTO
-def append_to_monitor_list(policy_id):
-    monitor_file = f"{APOLICE_DIR}/apolices_monitoradas.json"
-    if os.path.exists(monitor_file):
-        with open(monitor_file, "r") as f:
-            ids = json.load(f)
-    else:
-        ids = []
-    if policy_id not in ids:
-        ids.append(policy_id)
-    with open(monitor_file, "w") as f:
-        json.dump(ids, f, indent=2)
+def registrar_apolice():
+    print("\n📋 Cadastro de nova apólice")
 
-# INÍCIO
-print("📋 Cadastro de nova apólice (com JSON e monitoramento)")
+    local = input("📍 Local de cobertura: ").strip()
+    limite_chuva = int(input("💧 Limite de chuva acumulada (mm): "))
+    dias_chuva = int(input("⏱️ Dias de chuva (dias): "))
+    indemnizacao = int(input("💰 Valor da indenização (em wei): "))
+    dias_validade = int(input("📅 Em quantos dias expira o contrato? "))
 
-provider = ApiNetworkProvider(PROXY)
-policy_id = find_next_policy_id(provider)
-print(f"🔢 ID automático atribuído: {policy_id}")
+    expiration = int(time.time()) + dias_validade * 86400
+    policy_id = gerar_novo_id()
+    print(f"🆔 ID: {policy_id}")
 
-# DADOS
-local = input("📍 Local da apólice (ex: Barcarena-PA): ")
-duracao_dias = int(input("⏱️ Duração (em dias) para somar chuvas: "))
-limite_chuva = int(input("🌧️ Limite de chuva acumulada (mm): "))
-valor_egld = float(input("💰 Valor da indenização em EGLD (ex: 1.0): "))
-dias_validade = int(input("📅 Validade da apólice (dias): "))
-expiration = int(time.time()) + dias_validade * 86400
-valor_indemnizacao = int(valor_egld * 10**18)
+    # Função auxiliar para converter valores para hexadecimal com número par de caracteres
+    def h(x):
+        hex_str = hex(x)[2:] if isinstance(x, int) else x.encode("utf-8").hex()
+        return hex_str.zfill(len(hex_str) + (len(hex_str) % 2))
+    
+    # Concatena os argumentos na ordem: policy_id, contratante, local, limite_chuva, dias_chuva, valor_indemnizacao, expiration
+    contratante_hex = Address.from_bech32(SENDER_ADDRESS).hex()
+    args = "@".join([
+        h(policy_id),
+        contratante_hex,
+        h(local),
+        h(limite_chuva),
+        h(dias_chuva),
+        h(indemnizacao),
+        h(expiration)
+    ])
 
-# HEX CONVERSÃO PARA PAYLOAD
-hex_args = [
-    f"{policy_id:02x}",
-    Address.from_bech32(SENDER_ADDRESS).hex(),
-    local.encode().hex(),
-    f"{limite_chuva:02x}",
-    f"{duracao_dias:02x}",
-    f"{valor_indemnizacao:x}",
-    f"{expiration:x}"
-]
-payload_str = "registerPolicy@" + "@".join(hex_args)
-payload = TransactionPayload.from_str(payload_str)
+    # Cria o payload e converte para bytes
+    data_str = f"registerPolicy@{args}"
+    data_bytes = data_str.encode()  # Convertendo para bytes
 
-# TRANSAÇÃO
-account = provider.get_account(Address.from_bech32(SENDER_ADDRESS))
-signer = UserSigner.from_pem_file(PEM_PATH)
+    # Carrega o signer a partir do arquivo PEM e cria a conta usando a chave secreta
+    signer = UserPEM.from_file(Path(PEM_PATH))
+    sender = Account(secret_key=signer.secret_key)
+    
+    # Cria o objeto Address para o remetente a partir do SENDER_ADDRESS
+    sender_address = Address.from_bech32(SENDER_ADDRESS)
 
-tx = Transaction(
-    nonce=account.nonce,
-    sender=Address.from_bech32(SENDER_ADDRESS),
-    receiver=Address.from_bech32(CONTRACT_ADDRESS),
-    gas_limit=50_000_000,
-    chain_id=CHAIN_ID,
-    payload=payload,
-    value=0
-)
+    # Cria o provedor de rede com o endpoint da Devnet
+    provider = DevnetEntrypoint().create_network_provider()
+    account_on_chain = provider.get_account(sender_address)
+    sender.nonce = account_on_chain.nonce
 
-tx.signature = signer.sign(tx.serialize_for_signing().hex())
-tx_hash = provider.send_transaction(tx)
+    # Cria a transação com os parâmetros definidos
+    tx = Transaction(
+        nonce=sender.nonce,
+        sender=sender_address,
+        receiver=Address.from_bech32(CONTRACT_ADDRESS),
+        value=0,
+        gas_limit=100000000,
+        gas_price=1000000000,
+        chain_id=CHAIN_ID,
+        data=data_bytes
+    )
 
-# ✅ SALVA JSON DA APÓLICE
-dados = {
-    "policy_id": policy_id,
-    "local": local,
-    "duracao_dias": duracao_dias,
-    "limite_chuva": limite_chuva,
-    "valor_indemnizacao": valor_indemnizacao,
-    "expiration": expiration,
-    "contratante": SENDER_ADDRESS
-}
-with open(f"{APOLICE_DIR}/apolice_{policy_id}.json", "w") as f:
-    json.dump(dados, f, indent=2)
+    # Assina a transação passando o objeto Transaction diretamente
+    signature = sender.sign_transaction(tx)
+    tx.signature = signature
 
-# 📌 Atualiza a lista de apólices monitoradas
-append_to_monitor_list(policy_id)
+    # Envia a transação e obtém o hash
+    tx_hash = provider.send_transaction(tx)
+    print(f"\n✅ Transação enviada! Hash: {tx_hash.hex()}")
 
-print(f"\n✅ Apólice registrada com sucesso!")
-print(f"📄 Arquivo salvo: apolices/apolice_{policy_id}.json")
-print(f"📊 Adicionada ao monitoramento em apolices_monitoradas.json")
-print(f"🔎 Explorer: https://devnet-explorer.multiversx.com/transactions/{tx_hash}")
+    # Salva os dados da apólice em um arquivo JSON
+    apolice = {
+        "policy_id": policy_id,
+        "local": local,
+        "limite_chuva": limite_chuva,
+        "dias_chuva": dias_chuva,
+        "valor_indemnizacao": indemnizacao,
+        "expiration": expiration,
+        "tx_hash": tx_hash.hex(),
+        "timestamp_criacao": int(time.time())
+    }
+    salvar_json(f"{PASTA_APOLICES}/apolice_{policy_id}.json", apolice)
+
+    # Atualiza a lista de apólices monitoradas
+    monitor_path = f"{PASTA_APOLICES}/apolices_monitoradas.json"
+    monitoradas = []
+    if os.path.exists(monitor_path):
+        with open(monitor_path, "r") as f:
+            monitoradas = json.load(f)
+    monitoradas.append({"policy_id": policy_id, "ativo": True})
+    salvar_json(monitor_path, monitoradas)
+
+    print("📝 Apólice salva e monitoramento atualizado.\n")
+
+if __name__ == "__main__":
+    registrar_apolice()

@@ -1,0 +1,14 @@
+[
+    {
+        "policy_id": 1,
+        "ativo": true
+    },
+    {
+        "policy_id": 2,
+        "ativo": true
+    },
+    {
+        "policy_id": 3,
+        "ativo": true
+    }
+]

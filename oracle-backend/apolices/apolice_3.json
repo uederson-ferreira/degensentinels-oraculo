@@ -1,0 +1,10 @@
+{
+    "policy_id": 3,
+    "local": "W",
+    "limite_chuva": 123,
+    "dias_chuva": 2,
+    "valor_indemnizacao": 1,
+    "expiration": 1851023666,
+    "tx_hash": "0f8a99ff8844dda16b3c6c0cbbee6634b2e5db5b5fa88c3333a038c9c39d4244",
+    "timestamp_criacao": 1744406067
+}
