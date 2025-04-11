@@ -1,8 +1,0 @@
-[workspace]
-members = [
-    "smart-contracts/seguro_parametrico_sc",
-    "smart-contracts/seguro_parametrico_meta"
-]
-
-[workspace.metadata.elrond_wasm]
-contracts = ["smart-contracts/seguro_parametrico_sc"]
