@@ -95,16 +95,6 @@ pub trait SeguroParametrico {
 }
 
 
-    // #[payable("EGLD")]
-    // #[endpoint(receber_fundos)]
-    // fn receber_fundos(&self) {
-    //     let payment = self.call_value().egld(); // Obtém o valor enviado como EGLD
-    //     let payment_value = payment.into_value(self.blockchain().get_env_wrapper()); // Converte o `ManagedRef` em um `BigUint`
-    //     require!(payment_value != BigUint::zero(), "Nenhum EGLD enviado"); // Verifica se o valor é maior que zero
-    //     // Lógica para processar os fundos recebidos
-    // }
-    
-
     // -------------------------------------------------------
     // ACIONAMENTO DO SEGURO
     // -------------------------------------------------------
@@ -139,7 +129,7 @@ pub trait SeguroParametrico {
         require!(policy.ativo, "Policy is not active");
         require!(timestamp <= policy.expiration, "Policy has expired");
         require!(
-            chuva_acumulada < policy.limite_chuva,
+            chuva_acumulada > policy.limite_chuva,
             "Conditions for triggering the insurance are not met"
         );
 

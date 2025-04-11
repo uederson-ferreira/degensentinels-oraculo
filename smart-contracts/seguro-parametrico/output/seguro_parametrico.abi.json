@@ -77,6 +77,15 @@
             "outputs": []
         },
         {
+            "name": "receber_fundos",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
             "docs": [
                 "Aciona o pagamento do seguro caso as condições definidas sejam atendidas.",
                 "",

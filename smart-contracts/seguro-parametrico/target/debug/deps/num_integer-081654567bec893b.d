@@ -1,0 +1,9 @@
+/Users/uedersonferreira/Desktop/Programacao/NearX/degensentinels-oraculo/smart-contracts/seguro-parametrico/target/debug/deps/libnum_integer-081654567bec893b.rmeta: /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs
+
+/Users/uedersonferreira/Desktop/Programacao/NearX/degensentinels-oraculo/smart-contracts/seguro-parametrico/target/debug/deps/libnum_integer-081654567bec893b.rlib: /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs
+
+/Users/uedersonferreira/Desktop/Programacao/NearX/degensentinels-oraculo/smart-contracts/seguro-parametrico/target/debug/deps/num_integer-081654567bec893b.d: /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs /Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs
+
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/lib.rs:
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/roots.rs:
+/Users/uedersonferreira/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/num-integer-0.1.46/src/average.rs:
