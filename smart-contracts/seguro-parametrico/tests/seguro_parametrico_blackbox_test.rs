@@ -1,7 +1,6 @@
+// Estamos importando algumas ferramentas que nos ajudam a brincar de blockchain.
 use multiversx_sc_scenario::imports::*;
 use seguro_parametrico::seguro_parametrico_proxy::{self, Policy};
-// Estamos importando algumas ferramentas que nos ajudam a brincar de blockchain.
-use multiversx_sc_scenario::model::ReturnsNothing;
 
 const CODE_PATH: MxscPath = MxscPath::new("output/seguro_parametrico.mxsc.json");
 const OWNER: TestAddress = TestAddress::new("owner");
@@ -17,13 +16,13 @@ fn world() -> ScenarioWorld {
     blockchain
 }
 
-// Função para implantar o contrato
 fn seguro_parametrico_deploy() -> ScenarioWorld {
     let mut world = world();
 
-    //world.account(OWNER).nonce(0).balance(1_000_000_000u64);
-    world.account(OWNER).nonce(0).balance(1_000_000);
+    // Dono começa com saldo suficiente para cobrir as transações
+    world.account(OWNER).nonce(0).balance(2_000_000_000u64);
 
+    // Inicializa o contrato
     let contrato = world
         .tx()
         .from(OWNER)
@@ -87,7 +86,6 @@ fn test_register_policy() {
         .run();
 }
 
-// Teste: acionar pagamento com chuva abaixo do limite
 #[test]
 fn test_trigger_payment_success() {
     let mut world = seguro_parametrico_deploy();
@@ -115,10 +113,17 @@ fn test_trigger_payment_success() {
         )
         .run();
 
-        
-    world.current_block().block_timestamp(999_000u64);
+    // Envia EGLD ao contrato
+    world
+    .tx()
+    .from(OWNER)
+    .to(CONTRATO)
+    .egld(BigUint::from(1_000_000_000u64)) // Define o valor em EGLD
+    .raw_call("receber_fundos") // Chama o método do contrato para receber fundos
+    .run();
 
-   // world.account(CONTRATO).balance(1_000_000_000u64);
+    // Avança o tempo do bloco
+    world.current_block().block_timestamp(999_000u64);
 
     // Aciona pagamento com chuva menor que o limite
     world
