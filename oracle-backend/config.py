@@ -13,7 +13,9 @@ LONGITUDE = -46.6333
 RAIN_THRESHOLD = 100.0
 
 # Endereço do contrato (placeholder; será substituído após deploy)
-CONTRACT_ADDRESS = "erd1qqplaceholder"
+# CONTRACT_ADDRESS = "erd1qqplaceholder"
+
+CONTRACT_ADDRESS = "erd1qqqqqqqqqqqqqpgqa6sf0xnc4fuswfc7vu602l3y4yfpw7gmsjuss9m9gz"
 
 # Flag para envio real da transação (False para simulação)
 SEND_REAL_TX = False
