@@ -67,3 +67,38 @@ Cargo.lock
 
 # Outros arquivos de projeto
 *.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.log
+*.sqlite3
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+.oraculo-venv/
+oraculo-venv/
+
+# Arquivos de configuração locais
+.env
+*.pem
+
+# Pasta de apólices (mantém apenas os templates ou estrutura, não os dados gerados)
+oracle-backend/apolices/apolice_*.json
+oracle-backend/apolices/apolices_monitoradas.json
+oracle-backend/apolices/historico_ativacoes.log
+
+# MultiversX build
+smart-contracts/**/output/
+smart-contracts/**/wasm/
+smart-contracts/**/meta/
+smart-contracts/**/target/
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
