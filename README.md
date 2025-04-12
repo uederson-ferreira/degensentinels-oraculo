@@ -1,9 +1,11 @@
 # DegenSentinels Oráculo - Documentação Oficial
 
 ## Visão Geral
+
 O projeto **DegenSentinels Oráculo** é um sistema de seguro paramétrico baseado em blockchain, desenvolvido na **MultiversX Devnet**, com backend em Python, smart contracts em Rust, e integração a oráculos de dados climáticos simulados. Ele permite o registro de apólices que são acionadas automaticamente com base na acumulação de chuvas.
 
 ## Tecnologias Utilizadas
+
 - **MultiversX Devnet**: infraestrutura blockchain
 - **Python 3.11**: backend do oráculo
 - **Flask**: API de simulação climática
@@ -14,7 +16,8 @@ O projeto **DegenSentinels Oráculo** é um sistema de seguro paramétrico basea
 
 ## Estrutura do Projeto
 
-```
+```bash
+
 ├── oracle-backend/
 │   ├── main.py                      # Oráculo de monitoramento das apólices
 │   ├── register_policy.py          # Cadastro de novas apólices
@@ -26,6 +29,7 @@ O projeto **DegenSentinels Oráculo** é um sistema de seguro paramétrico basea
 │   ├── config.py                   # Configurações do projeto e .env
 ├── smart-contracts/               # Contrato inteligente em Rust
 ├── .gitignore                     # Ignora carteiras, apólices e ambientes locais
+
 ```
 
 ---
@@ -33,7 +37,9 @@ O projeto **DegenSentinels Oráculo** é um sistema de seguro paramétrico basea
 ## Fluxo de Trabalho
 
 ### 1. Cadastro de Apólice
+
 O arquivo `register_policy.py` permite cadastrar uma nova apólice, salvando:
+
 - ID automático
 - Local de cobertura
 - Limite de chuva acumulada
@@ -42,20 +48,25 @@ O arquivo `register_policy.py` permite cadastrar uma nova apólice, salvando:
 - Data de expiração
 
 Isso gera:
+
 - Um arquivo JSON com os dados da apólice em `apolices/`
 - Atualiza a lista `apolices_monitoradas.json`
 - Envia uma transação para o contrato inteligente
 
 ### 2. Monitoramento
+
 O `main.py` executa em loop:
+
 - Lê a lista de apólices ativas
 - Consulta dados de chuva da `mock_api.py`
 - Compara o acumulado com o limite de cada apólice
 - Aciona o contrato caso o limite seja ultrapassado
 
 ### 3. Acionamento
+
 O `blockchain.py` envia uma transação `triggerPayment` para o contrato
 com os dados da apólice, usando:
+
 - ID da apólice
 - Total de chuva (x10)
 - Timestamp atual
@@ -63,13 +74,16 @@ com os dados da apólice, usando:
 ---
 
 ## Simulação Climática
+
 O `mock_api.py` permite simular chuva acumulada por 10 dias.
+
 - Endpoint: `GET /onecall` retorna os dados simulados
 - Endpoint: `POST /set?value=XX` define a chuva diária
 
 ---
 
 ## Considerações de Segurança
+
 - O arquivo `.pem` e dados sensíveis estão protegidos via `.gitignore`
 - A pasta `smart-contracts/carteiras/` foi removida do histórico
 - As transações são assinadas com chaves locais e seguras
@@ -98,6 +112,7 @@ python listar_apolices.py
 ---
 
 ## Futuras Implementações
+
 - Integração com OpenWeatherMap real
 - Painel web com Streamlit ou Next.js
 - Cadastro de múltiplas contas
@@ -106,6 +121,7 @@ python listar_apolices.py
 ---
 
 ## Autor
+
 - Uederson Ferreira (@uederson-ferreira)
 - [GitHub](https://github.com/uederson-ferreira/degensentinels-oraculo.git)
 - Desenvolvido durante o desafio [DOJO da NearX School](https://twitter.com/nearxschool)
