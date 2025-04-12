@@ -3,4 +3,3 @@ requests
 python-dotenv
 multiversx-sdk
 rich
-python-dotenv

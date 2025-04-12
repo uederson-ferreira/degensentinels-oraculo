@@ -4,6 +4,32 @@
 
 O projeto **DegenSentinels Oráculo** é um sistema de seguro paramétrico baseado em blockchain, desenvolvido na **MultiversX Devnet**, com backend em Python, smart contracts em Rust, e integração a oráculos de dados climáticos simulados. Ele permite o registro de apólices que são acionadas automaticamente com base na acumulação de chuvas.
 
+## 🔐 Variáveis de Ambiente
+
+Antes de executar o projeto, crie um arquivo .env na raiz do repositório com o seguinte conteúdo:
+
+```bash
+# 🔑 Chave da API do OpenWeather (opcional, se usar API real)
+
+OPENWEATHER_API_KEY=your_openweather_api_key
+
+# 📄 Caminho do arquivo PEM com chave privada do remetente
+PEM_PATH=smart-contracts/carteiras/carteira1/erd1xxxxx.pem
+
+# 🏷️ Endereço do contrato inteligente
+CONTRACT_ADDRESS=erd1qqqqqqqqqqqqqpgqa6...
+
+# 📬 Endereço da conta remetente
+SENDER_ADDRESS=erd1xxxxx...
+
+# 🔗 ID da rede (ex: D para Devnet)
+CHAIN_ID=D
+
+# 🌐 Proxy da rede MultiversX
+PROXY=https://devnet-api.multiversx.com
+
+```
+
 ## Tecnologias Utilizadas
 
 - **MultiversX Devnet**: infraestrutura blockchain
