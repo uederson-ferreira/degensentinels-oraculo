@@ -8,6 +8,9 @@
 # Icone de pasta de rede
 Icon?
 
+*.pem
+smart-contracts/carteiras/carteira1/
+
 # Pastas geradas pelo Spotlight
 ._*
 
@@ -102,3 +105,6 @@ smart-contracts/**/target/
 
 # macOS
 .DS_Store
+
+# Carteiras - NÃO versionar chaves
+smart-contracts/carteiras/carteira1/
