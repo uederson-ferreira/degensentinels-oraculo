@@ -40,6 +40,7 @@ def salvar_historico(policy_id, chuva):
         f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Apólice {policy_id} acionada - {chuva:.2f} mm\n")
 
 def main():
+    
     console.rule("[bold cyan]⛅ Oráculo Paramétrico: Modo de Monitoramento Ativo")
     
     while True:
