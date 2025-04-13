@@ -19,7 +19,7 @@
     "name": "SeguroParametrico",
     "constructor": {
         "docs": [
-            "Inicializa o contrato."
+            "É executada apenas uma vez, no momento do deploy."
         ],
         "inputs": [],
         "outputs": []
@@ -30,18 +30,6 @@
     },
     "endpoints": [
         {
-            "docs": [
-                "Registra uma nova apólice de seguro.",
-                "",
-                "Parâmetros:",
-                "- `policy_id`: Identificador único da apólice.",
-                "- `contratante`: Endereço da carteira do contratante (destinatário do pagamento).",
-                "- `local`: Localização (nome ou coordenadas).",
-                "- `limite_chuva`: Limite de precipitação (em mm) que define o gatilho.",
-                "- `duracao_dias`: Período de observação (em dias).",
-                "- `valor_indemnizacao`: Valor da indenização (em EGLD).",
-                "- `expiration`: Momento de expiração da apólice (timestamp ou número de bloco)."
-            ],
             "name": "registerPolicy",
             "mutability": "mutable",
             "inputs": [
@@ -72,6 +60,10 @@
                 {
                     "name": "expiration",
                     "type": "u64"
+                },
+                {
+                    "name": "limite_acionamentos",
+                    "type": "u32"
                 }
             ],
             "outputs": []
@@ -86,23 +78,6 @@
             "outputs": []
         },
         {
-            "docs": [
-                "Aciona o pagamento do seguro caso as condições definidas sejam atendidas.",
-                "",
-                "Parâmetros:",
-                "- `policy_id`: Identificador da apólice.",
-                "- `chuva_acumulada`: Valor acumulado de chuva (em mm) medido pelo oráculo.",
-                "- `timestamp`: Momento da medição (usado para validar a expiração).",
-                "",
-                "Condições:",
-                "- A apólice deve estar ativa.",
-                "- O timestamp não pode ultrapassar a expiração.",
-                "- A precipitação acumulada deve ser menor que o limite definido.",
-                "",
-                "Ação:",
-                "- Transfere o valor da indenização em EGLD para o contratante.",
-                "- Atualiza a apólice para inativa e registra o timestamp da atualização."
-            ],
             "name": "triggerPayment",
             "mutability": "mutable",
             "inputs": [
@@ -122,9 +97,28 @@
             "outputs": []
         },
         {
-            "docs": [
-                "Consulta os dados da apólice com o ID fornecido."
+            "name": "cancelarApolice",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "policy_id",
+                    "type": "BigUint"
+                }
             ],
+            "outputs": []
+        },
+        {
+            "name": "reativarApolice",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "policy_id",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
             "name": "getPolicy",
             "mutability": "readonly",
             "inputs": [
@@ -177,6 +171,14 @@
                 {
                     "name": "ultima_atualizacao",
                     "type": "Option<u64>"
+                },
+                {
+                    "name": "limite_acionamentos",
+                    "type": "u32"
+                },
+                {
+                    "name": "acionamentos",
+                    "type": "u32"
                 }
             ]
         }

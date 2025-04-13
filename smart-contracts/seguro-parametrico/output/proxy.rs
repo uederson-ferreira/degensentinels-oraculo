@@ -43,7 +43,7 @@ where
     From: TxFrom<Env>,
     Gas: TxGas<Env>,
 {
-    /// Inicializa o contrato. 
+    /// É executada apenas uma vez, no momento do deploy. 
     pub fn init(
         self,
     ) -> TxTypedDeploy<Env, From, NotPayable, Gas, ()> {
@@ -82,16 +82,6 @@ where
     To: TxTo<Env>,
     Gas: TxGas<Env>,
 {
-    /// Registra uma nova apólice de seguro. 
-    ///  
-    /// Parâmetros: 
-    /// - `policy_id`: Identificador único da apólice. 
-    /// - `contratante`: Endereço da carteira do contratante (destinatário do pagamento). 
-    /// - `local`: Localização (nome ou coordenadas). 
-    /// - `limite_chuva`: Limite de precipitação (em mm) que define o gatilho. 
-    /// - `duracao_dias`: Período de observação (em dias). 
-    /// - `valor_indemnizacao`: Valor da indenização (em EGLD). 
-    /// - `expiration`: Momento de expiração da apólice (timestamp ou número de bloco). 
     pub fn register_policy<
         Arg0: ProxyArg<BigUint<Env::Api>>,
         Arg1: ProxyArg<ManagedAddress<Env::Api>>,
@@ -100,6 +90,7 @@ where
         Arg4: ProxyArg<u64>,
         Arg5: ProxyArg<BigUint<Env::Api>>,
         Arg6: ProxyArg<u64>,
+        Arg7: ProxyArg<u32>,
     >(
         self,
         policy_id: Arg0,
@@ -109,6 +100,7 @@ where
         duracao_dias: Arg4,
         valor_indemnizacao: Arg5,
         expiration: Arg6,
+        limite_acionamentos: Arg7,
     ) -> TxTypedCall<Env, From, To, NotPayable, Gas, ()> {
         self.wrapped_tx
             .payment(NotPayable)
@@ -120,24 +112,18 @@ where
             .argument(&duracao_dias)
             .argument(&valor_indemnizacao)
             .argument(&expiration)
+            .argument(&limite_acionamentos)
             .original_result()
     }
 
-    /// Aciona o pagamento do seguro caso as condições definidas sejam atendidas. 
-    ///  
-    /// Parâmetros: 
-    /// - `policy_id`: Identificador da apólice. 
-    /// - `chuva_acumulada`: Valor acumulado de chuva (em mm) medido pelo oráculo. 
-    /// - `timestamp`: Momento da medição (usado para validar a expiração). 
-    ///  
-    /// Condições: 
-    /// - A apólice deve estar ativa. 
-    /// - O timestamp não pode ultrapassar a expiração. 
-    /// - A precipitação acumulada deve ser menor que o limite definido. 
-    ///  
-    /// Ação: 
-    /// - Transfere o valor da indenização em EGLD para o contratante. 
-    /// - Atualiza a apólice para inativa e registra o timestamp da atualização. 
+    pub fn receber_fundos(
+        self,
+    ) -> TxTypedCall<Env, From, To, (), Gas, ()> {
+        self.wrapped_tx
+            .raw_call("receber_fundos")
+            .original_result()
+    }
+
     pub fn trigger_payment<
         Arg0: ProxyArg<BigUint<Env::Api>>,
         Arg1: ProxyArg<u64>,
@@ -157,7 +143,32 @@ where
             .original_result()
     }
 
-    /// Consulta os dados da apólice com o ID fornecido. 
+    pub fn cancelar_apolice<
+        Arg0: ProxyArg<BigUint<Env::Api>>,
+    >(
+        self,
+        policy_id: Arg0,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, ()> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("cancelarApolice")
+            .argument(&policy_id)
+            .original_result()
+    }
+
+    pub fn reativar_apolice<
+        Arg0: ProxyArg<BigUint<Env::Api>>,
+    >(
+        self,
+        policy_id: Arg0,
+    ) -> TxTypedCall<Env, From, To, NotPayable, Gas, ()> {
+        self.wrapped_tx
+            .payment(NotPayable)
+            .raw_call("reativarApolice")
+            .argument(&policy_id)
+            .original_result()
+    }
+
     pub fn get_policy<
         Arg0: ProxyArg<BigUint<Env::Api>>,
     >(
@@ -186,4 +197,6 @@ where
     pub ativo: bool,
     pub expiration: u64,
     pub ultima_atualizacao: Option<u64>,
+    pub limite_acionamentos: u32,
+    pub acionamentos: u32,
 }
