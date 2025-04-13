@@ -4,6 +4,7 @@ multiversx_sc::imports!();
 multiversx_sc::derive_imports!();
 use multiversx_sc::{derive_imports::*, imports::*};
 pub mod seguro_parametrico_proxy;
+
 #[allow(unused_imports)]
 
 #[type_abi]
