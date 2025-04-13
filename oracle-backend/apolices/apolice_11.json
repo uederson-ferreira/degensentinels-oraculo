@@ -1,0 +1,13 @@
+{
+    "policy_id": 11,
+    "local": "Paragominas/PA",
+    "limite_chuva": 300,
+    "dias_chuva": 10,
+    "valor_indenizacao": 1,
+    "expiration": 1776114834,
+    "tx_hash": "ab51a8852833847a02a42521a1495a0e2d0f8389c3fd300161d1acc00277bae3",
+    "timestamp_criacao": 1744578837,
+    "limite_acionamentos": 0,
+    "acionamentos": 0,
+    "ativo": true
+}

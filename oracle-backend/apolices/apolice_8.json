@@ -1,0 +1,14 @@
+{
+  "policy_id": 8,
+  "local": "Vancuver",
+  "limite_chuva": 200,
+  "dias_chuva": 5,
+  "valor_indenizacao": 1000000000,
+  "expiration": 1776111851,
+  "tx_hash": "94fc63d2cafa650e13850335f43ecc390c15e7b116b0fa74f228a03ea210e249",
+  "timestamp_criacao": 1744575901,
+  "limite_acionamentos": 0,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744585497
+}

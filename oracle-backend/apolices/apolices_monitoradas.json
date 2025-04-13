@@ -10,5 +10,33 @@
   {
     "policy_id": 5,
     "ativo": true
+  },
+  {
+    "policy_id": 6,
+    "ativo": true
+  },
+  {
+    "policy_id": 7,
+    "ativo": true
+  },
+  {
+    "policy_id": 8,
+    "ativo": true
+  },
+  {
+    "policy_id": 9,
+    "ativo": true
+  },
+  {
+    "policy_id": 10,
+    "ativo": true
+  },
+  {
+    "policy_id": 11,
+    "ativo": true
+  },
+  {
+    "policy_id": 12,
+    "ativo": true
   }
 ]

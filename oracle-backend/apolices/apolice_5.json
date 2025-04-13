@@ -1,0 +1,14 @@
+{
+  "policy_id": 5,
+  "local": "Belem",
+  "limite_chuva": 30,
+  "dias_chuva": 2,
+  "valor_indemnizacao": 1,
+  "expiration": 1761837552,
+  "tx_hash": "e540c9bf6eaedab06524fb17283caaab0f5d9831a7218eea0636a1fa576f5b1e",
+  "timestamp_criacao": 1744557553,
+  "limite_acionamentos": 0,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744585497
+}

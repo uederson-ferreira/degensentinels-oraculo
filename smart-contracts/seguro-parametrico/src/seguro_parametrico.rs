@@ -64,7 +64,7 @@ pub trait SeguroParametrico {
         duracao_dias: u64,
         valor_indemnizacao: BigUint<Self::Api>,
         expiration: u64,
-        limite_acionamentos: u32, // Novo parâmetro
+        limite_acionamentos: u32,
     ) {
         let policy = Policy {
             contratante,

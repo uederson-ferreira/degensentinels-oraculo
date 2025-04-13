@@ -1,10 +1,14 @@
 {
-    "policy_id": 1,
-    "local": "M",
-    "limite_chuva": 120,
-    "dias_chuva": 10,
-    "valor_indemnizacao": 1,
-    "expiration": 1755031561,
-    "tx_hash": "c0f35157208ab72c82f8bb7503a6ef1ed3c78449b1e859b8e5cacd6144176849",
-    "timestamp_criacao": 1744404363
+  "policy_id": 1,
+  "local": "M",
+  "limite_chuva": 120,
+  "dias_chuva": 10,
+  "valor_indemnizacao": 1,
+  "expiration": 1755031561,
+  "tx_hash": "c0f35157208ab72c82f8bb7503a6ef1ed3c78449b1e859b8e5cacd6144176849",
+  "timestamp_criacao": 1744404363,
+  "limite_acionamentos": 0,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744585497
 }

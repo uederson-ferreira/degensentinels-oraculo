@@ -1,0 +1,13 @@
+{
+    "policy_id": 4,
+    "local": "Sao Paulo",
+    "limite_chuva": 300,
+    "dias_chuva": 5,
+    "valor_indemnizacao": 1,
+    "expiration": 1782141440,
+    "tx_hash": "a5e047554a1e355a5e9b61b46df1c27a783ad58652470b32dab50408ce069cce",
+    "timestamp_criacao": 1744557441,
+    "limite_acionamentos": 0,
+    "acionamentos": 0,
+    "ativo": true
+}

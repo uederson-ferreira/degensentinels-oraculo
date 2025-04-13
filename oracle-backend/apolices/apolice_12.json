@@ -1,0 +1,14 @@
+{
+  "policy_id": 12,
+  "local": "Marab\u00e1/PA",
+  "limite_chuva": 200,
+  "dias_chuva": 5,
+  "valor_indenizacao": 1000000,
+  "expiration": 1776115014,
+  "tx_hash": "da9aa882e800a8f6b44a2c703a3140c88bb42a53bfa6c22f2047e5b3a69671ff",
+  "timestamp_criacao": 1744579015,
+  "limite_acionamentos": 5,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744586953
+}

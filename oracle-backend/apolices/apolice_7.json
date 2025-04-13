@@ -1,0 +1,13 @@
+{
+    "policy_id": 7,
+    "local": "Jacunda",
+    "limite_chuva": 750,
+    "dias_chuva": 10,
+    "valor_indenizacao": 1,
+    "expiration": 1776111210,
+    "tx_hash": "24fdf06cad69450773a05195241f4f5281c5174e081ebc840aa392cabd36c7bb",
+    "timestamp_criacao": 1744575211,
+    "limite_acionamentos": 0,
+    "acionamentos": 0,
+    "ativo": true
+}

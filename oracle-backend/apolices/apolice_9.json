@@ -1,0 +1,14 @@
+{
+  "policy_id": 9,
+  "local": "XXX",
+  "limite_chuva": 220,
+  "dias_chuva": 10,
+  "valor_indenizacao": 1000000000,
+  "expiration": 1917376193,
+  "tx_hash": "c78a486a5e3a354afb5d6c1b98ea8552797bd865b15f6d5bb8f7b891479853d9",
+  "timestamp_criacao": 1744576271,
+  "limite_acionamentos": 0,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744586953
+}

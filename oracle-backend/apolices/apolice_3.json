@@ -1,0 +1,13 @@
+{
+    "policy_id": 3,
+    "local": "Paraupaebas",
+    "limite_chuva": 500,
+    "dias_chuva": 10,
+    "valor_indemnizacao": 1,
+    "expiration": 1755031561,
+    "tx_hash": "0f8a99ff8844dda16b3c6c0cbbee6634b2e5db5b5fa88c3333a038c9c39d4244",
+    "timestamp_criacao": 1744404363,
+    "limite_acionamentos": 0,
+    "acionamentos": 0,
+    "ativo": true
+}
