@@ -4,35 +4,17 @@ import time
 import json
 import os
 from pathlib import Path
-from multiversx_sdk import Account, Address, Transaction, DevnetEntrypoint
+from multiversx_sdk import Account, Address, Transaction, DevnetEntrypoint, TransactionComputer
 from config import CONTRACT_ADDRESS, CHAIN_ID, PROXY, SENDER_ADDRESS
 from multiversx_sdk.wallet import UserPEM
 from blockchain import PEM_PATH
 
 PASTA_APOLICES = "apolices"
-PASTA_EXCLUIDAS = os.path.join(PASTA_APOLICES, "apolices_excluidas")
 os.makedirs(PASTA_APOLICES, exist_ok=True)
-os.makedirs(PASTA_EXCLUIDAS, exist_ok=True)
 
 def gerar_novo_id():
-    """
-    Gera um novo ID incremental, considerando também apólices movidas para a pasta 'apolices_excluidas'.
-    """
-    ids_usados = set()
-
-    for pasta in [PASTA_APOLICES, PASTA_EXCLUIDAS]:
-        arquivos = [f for f in os.listdir(pasta) if f.startswith("apolice_") and f.endswith(".json")]
-        for nome in arquivos:
-            try:
-                id_str = nome.replace("apolice_", "").replace(".json", "")
-                ids_usados.add(int(id_str))
-            except:
-                continue
-
-    if not ids_usados:
-        return 1
-
-    return max(ids_usados) + 1
+    arquivos = [f for f in os.listdir(PASTA_APOLICES) if f.startswith("apolice_") and f.endswith(".json")]
+    return len(arquivos) + 1
 
 def salvar_json(caminho, dados):
     with open(caminho, "w") as f:
@@ -70,6 +52,7 @@ def registrar_apolice():
     ])
 
     data_str = f"registerPolicy@{args}"
+    
     data_bytes = data_str.encode()
 
     signer = UserPEM.from_file(Path(PEM_PATH))

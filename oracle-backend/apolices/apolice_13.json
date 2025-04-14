@@ -1,0 +1,14 @@
+{
+  "policy_id": 13,
+  "local": "Maranhao",
+  "limite_chuva": 35,
+  "dias_chuva": 3,
+  "valor_indenizacao": 1,
+  "expiration": 1776126621,
+  "tx_hash": "d3fadb4e555002250b928b469cfe09f5773138e91a1744122a406755611cdd25",
+  "timestamp_criacao": 1744590622,
+  "limite_acionamentos": 3,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744590757
+}

@@ -105,3 +105,51 @@ def atualizar_apolice_apos_acionamento(apolice: dict, timestamp: int):
         json.dump(apolice, f, indent=2)
 
     print(f"💾 Apólice {policy_id} atualizada localmente com novo acionamento.")
+
+def cancelar_apolice_blockchain(policy_id: int):
+    """
+    Envia uma transação para cancelar manualmente uma apólice na blockchain.
+    Apenas o owner do contrato pode executar essa função.
+    """
+    if not SEND_REAL_TX:
+        print("💡 Modo simulação: nenhuma transação de cancelamento será enviada.")
+        print(f"Simulação de cancelarApolice(policy_id={policy_id})")
+        return
+
+    # Setup do provider e conta
+    provider = ApiNetworkProvider(PROXY)
+    account = provider.get_account(Address.from_bech32(SENDER_ADDRESS))
+    current_nonce = account.nonce
+
+    # Configura o signer e a conta a partir do PEM
+    signer_obj = UserSigner.from_pem_file(PEM_PATH)
+    sender = Account(secret_key=signer_obj.secret_key)
+
+    # Função auxiliar para codificar policy_id em hex seguro
+    def h(x):
+        hex_str = hex(x)[2:] if isinstance(x, int) else str(x).encode("utf-8").hex()
+        return hex_str.zfill(len(hex_str) + (len(hex_str) % 2))
+
+    # Payload da função de cancelamento definida no contrato
+    payload = f"cancelarApolice@{h(policy_id)}"
+
+    # Cria a transação
+    tx = Transaction(
+        nonce=current_nonce,
+        sender=Address.from_bech32(SENDER_ADDRESS),
+        receiver=Address.from_bech32(CONTRACT_ADDRESS),
+        value=0,
+        gas_limit=6_000_000,
+        chain_id=CHAIN_ID,
+        data=payload.encode()
+    )
+
+    # Assina a transação corretamente
+    tx.signature = sender.sign_transaction(tx)
+
+    # Envia para a blockchain
+    tx_hash = provider.send_transaction(tx)
+
+    print(f"✅ Apólice {policy_id} cancelada na blockchain. Hash: {tx_hash.hex()}")
+    print(f"🔗 Explorer: https://devnet-explorer.multiversx.com/transactions/{tx_hash.hex()}")
+    return tx_hash.hex()

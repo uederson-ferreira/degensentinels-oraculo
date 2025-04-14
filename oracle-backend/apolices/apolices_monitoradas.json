@@ -1,6 +1,6 @@
 [
   {
-    "policy_id": 1,
+    "policy_id": 3,
     "ativo": true
   },
   {
@@ -12,31 +12,7 @@
     "ativo": true
   },
   {
-    "policy_id": 6,
-    "ativo": true
-  },
-  {
-    "policy_id": 7,
-    "ativo": true
-  },
-  {
-    "policy_id": 8,
-    "ativo": true
-  },
-  {
-    "policy_id": 9,
-    "ativo": true
-  },
-  {
-    "policy_id": 10,
-    "ativo": true
-  },
-  {
-    "policy_id": 11,
-    "ativo": true
-  },
-  {
-    "policy_id": 12,
+    "policy_id": 13,
     "ativo": true
   }
 ]

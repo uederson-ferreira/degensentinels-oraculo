@@ -1,0 +1,14 @@
+{
+  "policy_id": 10,
+  "local": "MMM",
+  "limite_chuva": 500,
+  "dias_chuva": 30,
+  "valor_indenizacao": 1,
+  "expiration": 1776112335,
+  "tx_hash": "5ae374b2b0974a5c3edb95f64e465e28c43dd67f6c67b63c905944fb6d03a6a4",
+  "timestamp_criacao": 1744576338,
+  "limite_acionamentos": 30,
+  "acionamentos": 0,
+  "ativo": false,
+  "status": "cancelada"
+}

@@ -9,6 +9,7 @@
   "timestamp_criacao": 1744579015,
   "limite_acionamentos": 5,
   "acionamentos": 1,
-  "ativo": true,
-  "ultima_atualizacao": 1744586953
+  "ativo": false,
+  "ultima_atualizacao": 1744586953,
+  "status": "cancelada"
 }

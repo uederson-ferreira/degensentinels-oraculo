@@ -5,7 +5,7 @@ from rich import print
 from rich.panel import Panel
 from rich.console import Console
 from weather import get_accumulated_precipitation
-from blockchain import send_trigger_transaction, atualizar_apolice_apos_acionamento  # ✅ LINHA ATUALIZADA
+from blockchain import send_trigger_transaction, atualizar_apolice_apos_acionamento
 
 console = Console()
 
