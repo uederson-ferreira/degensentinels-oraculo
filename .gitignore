@@ -69,13 +69,13 @@ Cargo.lock
 *.iml
 
 # Outros arquivos de projeto
-*.log
+#*.log
 
 # Python
 __pycache__/
 *.py[cod]
 *.egg-info/
-*.log
+#*.log
 *.sqlite3
 
 # Ambientes virtuais

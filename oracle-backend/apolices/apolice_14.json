@@ -1,0 +1,14 @@
+{
+  "policy_id": 14,
+  "local": "Santa Catarina/SC",
+  "limite_chuva": 100,
+  "dias_chuva": 5,
+  "valor_indenizacao": 1,
+  "expiration": 1851212870,
+  "tx_hash": "5e580f73dcf1c2ebee30116892c0af7673533fefb1f1ba2a2a7926698364384d",
+  "timestamp_criacao": 1744595271,
+  "limite_acionamentos": 10,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744595363
+}

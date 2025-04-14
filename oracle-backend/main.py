@@ -114,19 +114,20 @@ def main():
                         segundos_desde_ultimo = now - ultima
                         dias_passados = segundos_desde_ultimo // 86400
                         if dias_passados < duracao_dias:
-                            print(f"⏳ Último acionamento foi há {dias_passados} dias. Ainda não é possível acionar novamente.")
+                            console.print(f"[bold red]🚨 Gatilho ativado! Chuva > {limite} mm, Limite {limite} mm.[/bold red]")
+                            print(f"[green]⏳ Último acionamento foi há {dias_passados} dias. Ainda não é possível acionar novamente.[/green]")
                             continue
 
                     # Tudo certo, aciona
                     console.print(f"[bold red]🚨 Gatilho ativado! Chuva > {limite} mm.[/bold red]")
                     hash_tx = send_trigger_transaction(policy_id, chuva, now)
                     salvar_historico(policy_id, chuva, hash_tx)
-                    atualizar_apolice_apos_acionamento(apolice, now)  # ✅ LINHA NOVA
+                    atualizar_apolice_apos_acionamento(apolice, now)
                 else:
                     console.print(f"[green]✅ Condição não atingida ({chuva:.2f} mm < {limite} mm)[/green]")
 
         console.print("[dim]⏳ Aguardando 60 segundos...\n[/dim]")
-        time.sleep(60)
+        time.sleep(10)
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,14 @@
+{
+  "policy_id": 15,
+  "local": "Rio de Janeiro/RJ",
+  "limite_chuva": 140,
+  "dias_chuva": 2,
+  "valor_indenizacao": 1,
+  "expiration": 1776134644,
+  "tx_hash": "9320850cff36b503892d8e2db8bc233aa149162a87f26181a3e6d16661a9cf8f",
+  "timestamp_criacao": 1744598645,
+  "limite_acionamentos": 2,
+  "acionamentos": 1,
+  "ativo": true,
+  "ultima_atualizacao": 1744598775
+}

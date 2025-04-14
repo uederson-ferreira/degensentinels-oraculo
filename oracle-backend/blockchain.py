@@ -71,6 +71,8 @@ def send_trigger_transaction(policy_id: int, precipitation: float, timestamp: in
 
     # Atualiza monitoramento local
     atualizar_monitoramento_local(policy_id)
+    
+    return tx_hash.hex()
 
 def atualizar_monitoramento_local(policy_id: int):
     """
@@ -152,4 +154,5 @@ def cancelar_apolice_blockchain(policy_id: int):
 
     print(f"✅ Apólice {policy_id} cancelada na blockchain. Hash: {tx_hash.hex()}")
     print(f"🔗 Explorer: https://devnet-explorer.multiversx.com/transactions/{tx_hash.hex()}")
+    
     return tx_hash.hex()
